@@ -31,7 +31,7 @@ const Navbar = () => {
 
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <NavLink to="/singin" className="nav-link text-light">
+              <NavLink to="/signin" className="nav-link text-light">
                 Sing In
               </NavLink>
             </li>

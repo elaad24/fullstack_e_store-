@@ -18,6 +18,7 @@ class Form extends Component {
     } = this;
 
     const { error } = Joi.validate(data, schema, { abortEarly: false });
+
     if (!error) {
       return null;
     }
@@ -42,17 +43,22 @@ class Form extends Component {
     this.doSubmit();
   };
 
-  handleChange = ({ target: { name, value } }) => {
+  handleChange = ({ target: { name, value, type } }) => {
     const { data, errors } = this.state;
+
+    // data
+    const updatedData = { ...data };
+    updatedData[name] = value;
+
+    if (type === "checkbox") {
+      let value = document.getElementsByName("seller")[0].checked;
+      updatedData[name] = value;
+    }
 
     // validation
     const updatedErrors = { ...errors };
     const errorMessage = this.validateProperty(name, value);
     updatedErrors[name] = errorMessage;
-
-    // data
-    const updatedData = { ...data };
-    updatedData[name] = value;
 
     // setstate
     this.setState({ data: updatedData, errors: updatedErrors });
@@ -80,6 +86,7 @@ class Form extends Component {
           type="checkbox"
           lable={label}
           name={name}
+          onChange={this.handleChange}
         />
         <label class="form-check-label" htmlFor={name}>
           {label}

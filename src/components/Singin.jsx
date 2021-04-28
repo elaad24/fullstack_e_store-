@@ -5,39 +5,38 @@ import Joi from "joi-browser";
 import http from "../services/http";
 import { apiUrl } from "../config.json";
 import { toast } from "react-toastify";
+import userService from "../services/userService";
 
-class Signup extends Form {
+class Signin extends Form {
   state = {
     data: {
-      name: "",
       email: "",
       password: "",
-      seller: false,
     },
     errors: "",
   };
 
   schema = {
-    name: Joi.string().min(2).max(254).required().label("Name"),
     email: Joi.string().email().required().label("Email"),
-    password: Joi.string().min(8).max(254).required().label("Password"),
-    seller: Joi.boolean(),
+    password: Joi.string().min(8).max(255).required().label("Password"),
   };
+
+  // need to retun from the backend to redux  the user info after auth and display it on the toast
 
   doSubmit = async () => {
     const { data } = this.state;
 
     try {
-      await http.post(`${apiUrl}/users/singup`, data);
-      toast.success(`you just singup as ${data.name}`);
-      if (!data.seller) {
-        this.props.history.replace("/singin");
-      } else {
-        this.props.history.replace("/setUpShop");
-      }
+      await userService.login(data.email, data.password);
+      await toast.success(`welcome -  ${data.email}`);
+      await setTimeout(() => {
+        this.props.history.replace("/");
+      }, 5000);
     } catch (err) {
       if (err.response && err.response.status === 400) {
-        this.setState({ errors: err.response.data.errors });
+        toast.error("worng email or password -try again ");
+        this.setState({ errors: { email: err.response.data } });
+        return;
       }
     }
   };
@@ -45,16 +44,15 @@ class Signup extends Form {
   render() {
     return (
       <div className="container">
-        <PageHeader titleText="sing up page " />
+        <PageHeader titleText="sign-in page " />
 
         <div className="row">
           <div className="col-12">
             <form noValidate onSubmit={this.handleSubmit}>
-              {this.renderInput("name", "Name")}
               {this.renderInput("email", "Email", "email")}
               {this.renderInput("password", "Password", "password")}
-              {this.renderCheckBox("sign up as seller ", "seller")}
-              {this.renderButton("Sign Up")}
+
+              {this.renderButton("log in ")}
             </form>
           </div>
         </div>
@@ -63,4 +61,4 @@ class Signup extends Form {
   }
 }
 
-export default Signup;
+export default Signin;
