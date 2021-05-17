@@ -1,4 +1,4 @@
-import { LOGIN } from "../actions/actionTypes";
+import { LOGIN, LOGOUT } from "../actions/actionTypes";
 
 const initialState = {
   user: "",
@@ -12,6 +12,9 @@ function userStatusReducer(state = initialState, action) {
         ...state,
         user: action.payload,
       };
+
+    case LOGOUT:
+      return { state: " " };
 
     default:
       return state;

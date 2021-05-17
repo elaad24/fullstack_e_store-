@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Input from "./Input";
 import Joi from "joi-browser";
+import Choice from "./choice";
 
 class Form extends Component {
   validateProperty = (name, value) => {
@@ -64,16 +65,38 @@ class Form extends Component {
     this.setState({ data: updatedData, errors: updatedErrors });
   };
 
-  renderInput(name, label, type = "text") {
+  renderInput(name, label, type = "text", ...rest) {
     const { data, errors } = this.state;
     return (
       <Input
         type={type}
         label={label}
         name={name}
+        rest={rest}
         onChange={this.handleChange}
         error={errors[name]}
         value={data[name]}
+      />
+    );
+  }
+
+  renderChoice(name, options_list) {
+    // to updata the data in renderchoise on-change it diractly saves
+    const { data, errors } = this.state;
+    let choiseVal = document.getElementsByName(name);
+    if (choiseVal[0] === undefined) {
+      choiseVal = choiseVal[0];
+    } else if (choiseVal[0] !== undefined) {
+      choiseVal = choiseVal[0].value;
+    }
+    return (
+      <Choice
+        name={name}
+        options_list={options_list}
+        error={errors[name]}
+        onChange={this.handleChange}
+        value={choiseVal}
+        onChange={(data[name] = choiseVal)}
       />
     );
   }

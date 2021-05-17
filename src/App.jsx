@@ -10,15 +10,16 @@ import Signin from "./components/Singin";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
-import userService from "./services/userService";
-import store from "./redux/store";
-import { loginUser } from "./redux/actions/userSystem";
+//import userService from "./services/userService";
+import Profile from "./components/Profile";
+import Logout from "./components/Logout";
+import AddProduct from "./components/AddProduct";
 
 function App() {
   useEffect(() => {
-    const user = userService.getCurrentUser();
-    store.dispatch(loginUser({ name: "some name" }));
+    //const user = userService.getCurrentUser();
   });
+
   return (
     <div className="d-flex flex-column min-vh-100">
       <ToastContainer />
@@ -28,9 +29,12 @@ function App() {
       <main className="container-fluid flex-fill">
         <Switch>
           <Route path="/PageNotFound404" component={PageNotFound404} />
+          <Route path="/addproduct" exact component={AddProduct} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/signin" exact component={Signin} />
           <Route path="/about" exact component={About} />
+          <Route path="/logout" exact component={Logout} />
+          <Route path="/profile" exact component={Profile} />
           <Route path="/" exact component={Home} />
           <Redirect to="/PageNotFound404" />
         </Switch>

@@ -2,10 +2,9 @@ import React from "react";
 import Form from "./common/Form";
 import PageHeader from "../components/common/PageHeader";
 import Joi from "joi-browser";
-import http from "../services/http";
-import { apiUrl } from "../config.json";
 import { toast } from "react-toastify";
 import userService from "../services/userService";
+import { Redirect } from "react-router";
 
 class Signin extends Form {
   state = {
@@ -21,27 +20,34 @@ class Signin extends Form {
     password: Joi.string().min(8).max(255).required().label("Password"),
   };
 
-  // need to retun from the backend to redux  the user info after auth and display it on the toast
-
   doSubmit = async () => {
     const { data } = this.state;
 
     try {
       await userService.login(data.email, data.password);
-      await toast.success(`welcome -  ${data.email}`);
+
       await setTimeout(() => {
         this.props.history.replace("/");
-      }, 5000);
+      }, 2500);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         toast.error("worng email or password -try again ");
-        this.setState({ errors: { email: err.response.data } });
+        console.log(err.response.data);
+        this.setState({
+          errors: {
+            email: err.response.data.email,
+            password: err.response.data.password,
+          },
+        });
+
         return;
       }
     }
   };
 
   render() {
+    // check if the user loged in
+    if (userService.getCurrentUser()) return <Redirect to="/" />;
     return (
       <div className="container">
         <PageHeader titleText="sign-in page " />

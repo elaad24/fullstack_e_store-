@@ -5,6 +5,8 @@ import Joi from "joi-browser";
 import http from "../services/http";
 import { apiUrl } from "../config.json";
 import { toast } from "react-toastify";
+import userService from "../services/userService";
+import { Redirect } from "react-router";
 
 class Signup extends Form {
   state = {
@@ -43,6 +45,8 @@ class Signup extends Form {
   };
 
   render() {
+    // check if the user loged in
+    if (userService.getCurrentUser()) return <Redirect to="/" />;
     return (
       <div className="container">
         <PageHeader titleText="sing up page " />

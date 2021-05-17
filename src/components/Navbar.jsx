@@ -1,6 +1,11 @@
+import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
+  // check informaition about the user  in the redux store
+  let user = useSelector((state) => state.userSystem);
+  let first_name = user.user ? user.user.userInfo.name : " ";
+  let user_seller = user.user ? user.user.userInfo.seller : " ";
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-dark shadow-sm">
       <div className="container">
@@ -27,28 +32,47 @@ const Navbar = () => {
                 About
               </NavLink>
             </li>
-          </ul>
 
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <NavLink to="/signin" className="nav-link text-light">
-                Sing In
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/signup" className="nav-link text-light">
-                Sign Up
-              </NavLink>
-            </li>
+            {user.user && user_seller && (
+              <li className="nav-item">
+                <NavLink to="/addproduct" className="nav-link text-light">
+                  Add product
+                </NavLink>
+              </li>
+            )}
           </ul>
+          {!user.user && (
+            <>
+              <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <NavLink to="/signin" className="nav-link text-light">
+                    Sing In
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink to="/signup" className="nav-link text-light">
+                    Sign Up
+                  </NavLink>
+                </li>
+              </ul>
+            </>
+          )}
 
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <NavLink to="/logout" className="nav-link text-light">
-                Sing Out
-              </NavLink>
-            </li>
-          </ul>
+          {user.user && (
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <NavLink to="/profile" className="nav-link text-light">
+                  Welcome , {first_name}
+                </NavLink>
+              </li>
+
+              <li className="nav-item">
+                <NavLink to="/logout" className="nav-link text-light">
+                  Sing Out
+                </NavLink>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </nav>
