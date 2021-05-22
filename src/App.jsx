@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import AddProduct from "./components/AddProduct";
+import ProductPage from "./components/ProductPage";
 
 function App() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/about" exact component={About} />
           <Route path="/logout" exact component={Logout} />
           <Route path="/profile" exact component={Profile} />
+          <Route path="/item" component={ProductPage} />
           <Route path="/" exact component={Home} />
           <Redirect to="/PageNotFound404" />
         </Switch>

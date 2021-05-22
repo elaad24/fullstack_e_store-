@@ -103,15 +103,15 @@ class Form extends Component {
 
   renderCheckBox(label, name) {
     return (
-      <div class="form-check form-switch">
+      <div className="form-check form-switch">
         <input
-          class="form-check-input"
+          className="form-check-input"
           type="checkbox"
           lable={label}
           name={name}
           onChange={this.handleChange}
         />
-        <label class="form-check-label" htmlFor={name}>
+        <label className="form-check-label" htmlFor={name}>
           {label}
         </label>
       </div>

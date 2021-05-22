@@ -40,9 +40,9 @@ class AddProduct extends Form {
       await productService.createproduct({ ...data, seller_id: sellerId });
       toast.success("new item added ! ");
 
-      /*  await setTimeout(() => {
+      await setTimeout(() => {
         this.props.history.replace("/");
-      }, 1400); */
+      }, 1400);
     } catch (err) {
       if (err.response && err.response.status === 400) {
         toast.error("something went worng - try again ");
