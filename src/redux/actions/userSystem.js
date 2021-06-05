@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "./actionTypes";
+import { IMPORTSHOPPINGCART, LOGIN, LOGOUT } from "./actionTypes";
 
 // action that save the user info
 

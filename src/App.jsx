@@ -15,6 +15,7 @@ import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import AddProduct from "./components/AddProduct";
 import ProductPage from "./components/ProductPage";
+import ShoppingCart from "./components/ShoppingCart";
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
       <main className="container-fluid flex-fill">
         <Switch>
           <Route path="/PageNotFound404" component={PageNotFound404} />
+          <Route path="/shoppingCart" exact component={ShoppingCart} />
           <Route path="/addproduct" exact component={AddProduct} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/signin" exact component={Signin} />

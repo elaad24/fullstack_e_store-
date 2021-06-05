@@ -65,6 +65,11 @@ const Navbar = () => {
                   Welcome , {first_name}
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink to="/shoppingcart" className="nav-link text-light">
+                  <i class="fas fa-dolly-flatbed"></i>
+                </NavLink>
+              </li>
 
               <li className="nav-item">
                 <NavLink to="/logout" className="nav-link text-light">

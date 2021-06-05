@@ -5,6 +5,7 @@ import store from "../redux/store";
 import { loginUser } from "../redux/actions/userSystem";
 import { logOut } from "../redux/actions/userSystem";
 import { toast } from "react-toastify";
+import { updateReduxShoppingCart } from "../redux/reduxFunctions";
 
 const tokenKey = "token";
 
@@ -17,6 +18,9 @@ export async function login(email, password) {
   await store.dispatch(
     loginUser({ name: data.name, seller: data.seller, id: data.user_id })
   );
+
+  //update redux shopping cart
+  await updateReduxShoppingCart(data.user_id);
 }
 
 export function getCurrentUser() {

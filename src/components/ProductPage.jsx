@@ -9,7 +9,6 @@ const ProductPage = () => {
   let user_id = user.user ? user.user.userInfo.id : "";
 
   var url_string = window.location.href;
-  //  console.log(url_string);
   var url = new URL(url_string);
   var id = url.searchParams.get("id");
   console.log(id);

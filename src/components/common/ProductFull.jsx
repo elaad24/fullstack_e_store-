@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import Counter from "./Counter";
-import ProductCheacing from "./ProductCheacing";
+import ProductCheacing from "./ProductChecking";
 
 const ProductFull = ({
   product: { name, price, pic, description, qty, category, seller_id },
@@ -9,7 +9,7 @@ const ProductFull = ({
 }) => {
   const product = { name, price, pic, description, qty, category, seller_id };
 
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
 
   const callback = useCallback((amount) => {
     setAmount(amount);
@@ -35,18 +35,17 @@ const ProductFull = ({
         <h5>category : {category}</h5>
         <p className="mb-0">prod id :{productId} </p>
         <p className="mb-0">seller id : {seller_id}</p>
-
         <p>
           price per unit : <b> {price} $</b>
         </p>
+        <Counter parentCallback={callback} qty={1} />
 
-        <Counter parentCallback={callback} />
-        <p>total price - {amount * price}$</p>
+        <p>total price : {amount * price}$</p>
         {user_id ? (
           <ProductCheacing
-            amount={amount}
+            quantity={amount}
             user_id={user_id}
-            product={product}
+            productid={productId}
           />
         ) : (
           ""

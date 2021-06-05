@@ -3,7 +3,6 @@ import PageHeader from "./common/PageHeader";
 import productService from "../services/productService";
 import Product from "./common/ProductCard";
 
-//useEffect = () => console.log("useefect work");
 const Home = () => {
   const [products, setProduct] = useState("");
   useEffect(async () => {
@@ -12,13 +11,6 @@ const Home = () => {
     setProduct(data);
     return data;
   }, []);
-
-  const pr = () => {
-    for (let i of products) {
-      console.log(i);
-      <Product key={i._id} product={i} />;
-    }
-  };
 
   return (
     <div className="container">
