@@ -25,12 +25,10 @@ const ShoppingCartPreviewItem = ({ prodDate, user_id }) => {
       user_id,
       prodDate.product.productid
     );
-    console.log(product.name, " removed ");
   };
 
   // for counter
   const [amount, setAmount] = useState(Number(prodDate.product.quantity));
-  console.log("product: ", user_id, prodDate.product.productid, amount);
   const callback = useCallback(async (amount) => {
     setAmount(amount);
 

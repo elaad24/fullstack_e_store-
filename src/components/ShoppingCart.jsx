@@ -22,7 +22,7 @@ const ShoppingCart = () => {
   useEffect(async () => {
     try {
       let cart = await shoppingCartService.getShoppingCart(user_id);
-      console.log("products", cart.data.products);
+
       setProduct(cart.data.products);
     } catch (err) {
       console.log(err);

@@ -17,10 +17,9 @@ const Profile = () => {
     const { data } = await productService.getAllProducts();
 
     setProduct(data);
-    console.log(data);
+
     data.map((prod) => {
       if (prod.seller_id == user_id) {
-        console.log(prod);
       }
     });
     return data;

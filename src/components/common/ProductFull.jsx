@@ -23,8 +23,6 @@ const ProductFull = ({
       return shoppingCartProduct.product.productid == productId;
     });
 
-    console.log("item in productfull", shoppingCartItem);
-
     if (shoppingCartItem.length != 0) {
       shoppingCartItemQty = Number(shoppingCartItem[0].product.quantity);
     }

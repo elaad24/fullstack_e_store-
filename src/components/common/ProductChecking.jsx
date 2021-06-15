@@ -23,14 +23,12 @@ const ProductCheacing = ({ quantity, user_id, productid, price }) => {
   const updateQty = async () => {
     try {
       toast.success("item qty updated ", { autoClose: 2500 });
-      console.log("update QTY ");
+
       await shoppingCartService.updateProdQtyInShoppingCart(
         user_id,
         productid,
         quantity
       );
-
-      console.log("DSssssssssssssssssssssssssssssssssssssssssssss");
     } catch (err) {
       console.log("err from productChecking  updateQty", err);
       return "err from productChecking updateQty ", err;
@@ -39,7 +37,6 @@ const ProductCheacing = ({ quantity, user_id, productid, price }) => {
 
   const addToCart = async () => {
     try {
-      console.log("add to cart ");
       await shoppingCartService.addToCart({
         quantity,
         user_id,
@@ -52,8 +49,6 @@ const ProductCheacing = ({ quantity, user_id, productid, price }) => {
       return "err from productChecking addToCart ", err;
     }
   };
-
-  console.log("itemFromShoppingCartRedux", itemFromShoppingCartRedux);
 
   return (
     <div className="  col-9  ">

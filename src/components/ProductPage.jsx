@@ -11,7 +11,6 @@ const ProductPage = () => {
   var url_string = window.location.href;
   var url = new URL(url_string);
   var id = url.searchParams.get("id");
-  console.log(id);
 
   const [product, setProduct] = useState("");
 
@@ -20,8 +19,6 @@ const ProductPage = () => {
     setProduct(data);
     return data;
   }, []);
-
-  console.log(product.name);
 
   return (
     <div className="container">
