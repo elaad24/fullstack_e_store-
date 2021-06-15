@@ -1,0 +1,7 @@
+in shopping cart pill badge 
+
+<div className="text-primary">
+          <span class="badge badge-pill badge-primary">
+            In shopping-cart <CartCheck className="ml-1" size={24} />
+          </span>
+        </div>

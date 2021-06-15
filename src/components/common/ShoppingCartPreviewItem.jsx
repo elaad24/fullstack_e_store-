@@ -3,12 +3,12 @@ import Counter from "../common/Counter";
 import productService from "../../services/productService";
 import shoppingCartService from "../../services/shoppingCartAndWishListService";
 import { Link } from "react-router-dom";
+import { updateReduxShoppingCart } from "../../redux/reduxFunctions";
 
 const ShoppingCartPreviewItem = ({ prodDate, user_id }) => {
   // getting info about product
 
   const [product, setProduct] = useState({});
-
   useEffect(async () => {
     //prodResponse = all the data from the server about the prod incloud req info
     // could use for future bug hunt
@@ -29,14 +29,24 @@ const ShoppingCartPreviewItem = ({ prodDate, user_id }) => {
   };
 
   // for counter
-  const [amount, setAmount] = useState(prodDate.product.quantity);
-
-  const callback = useCallback((amount) => {
+  const [amount, setAmount] = useState(Number(prodDate.product.quantity));
+  console.log("product: ", user_id, prodDate.product.productid, amount);
+  const callback = useCallback(async (amount) => {
     setAmount(amount);
-  }, []);
+
+    await shoppingCartService.updateProdQtyInShoppingCart(
+      user_id,
+      prodDate.product.productid,
+      amount
+    );
+
+    // need to update redux !!
+  });
+
+  let total_price = Number(Number(product.price) * Number(amount));
 
   return (
-    <div className="shoppingCArtProduct d-flex justify-content-between align-items-center p-3">
+    <div className="shoppingCArtProduct   d-flex justify-content-between align-items-center p-3">
       <div className="">
         <img src={product.pic} alt={product.name} width="150em" />
       </div>
@@ -56,16 +66,18 @@ const ShoppingCartPreviewItem = ({ prodDate, user_id }) => {
           <Counter
             key={prodDate.product._id}
             parentCallback={callback}
-            qty={amount}
+            qty={Number(amount)}
+            maxNumber={product.qty}
           />
         }
       </div>
-      <div className="my-3 d-flex flex-column justify-content-around">
-        <h4>price: {product.price} $</h4>
+
+      <div className="my-3 d-flex flex-column ">
+        <h4>price: {total_price} $</h4>
         <h5>in stock : {product.qty}</h5>
       </div>
-      <div>
-        <button className="btn btn-danger" onClick={removeItem}>
+      <div className=" align-self-end ">
+        <button className="btn btn-danger " onClick={removeItem}>
           remove
         </button>
       </div>

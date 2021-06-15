@@ -14,17 +14,18 @@ const ProductPage = () => {
   console.log(id);
 
   const [product, setProduct] = useState("");
+
   useEffect(async () => {
     const { data } = await productService.getProduct(id);
-
     setProduct(data);
-    console.log(product);
     return data;
   }, []);
 
+  console.log(product.name);
+
   return (
     <div className="container">
-      <PageHeader titleText="spesific item page " />
+      <PageHeader titleText={product.name} />
       {<ProductFull product={product} productId={id} user_id={user_id} />}
     </div>
   );

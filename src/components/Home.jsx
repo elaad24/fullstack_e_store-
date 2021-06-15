@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(async () => {
     const { data } = await productService.getAllProducts();
 
-    setProduct(data);
+    setProduct(data.sort(() => Math.random() - 0.5));
     return data;
   }, []);
 

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-const Counter = ({ parentCallback, qty }) => {
-  const [amount, setAmount] = useState(qty);
-
+const Counter = ({ parentCallback, qty, maxNumber }) => {
+  // maxNumber is the highest number that the counter can reach - is to set to the qty of product in stock
+  const [amount, setAmount] = useState(Number(qty));
+  console.log("Qty from counter ", amount);
   return (
     <div className="">
       <h5 className="text-center ">Quantity</h5>
@@ -20,8 +21,12 @@ const Counter = ({ parentCallback, qty }) => {
         <button
           className="btn btn-success"
           onClick={() => {
-            setAmount(amount + 1);
-            parentCallback(amount + 1);
+            amount >= maxNumber
+              ? setAmount(Number(amount))
+              : setAmount(Number(amount) + Number(1));
+            amount >= maxNumber
+              ? parentCallback(Number(amount))
+              : parentCallback(Number(amount) + Number(1));
           }}
         >
           +

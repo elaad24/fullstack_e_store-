@@ -35,7 +35,7 @@ class AddProduct extends Form {
     const sellerId = userInfo.id;
 
     const { data } = this.state;
-    const { imgSrc } = this;
+
     try {
       await productService.createproduct({ ...data, seller_id: sellerId });
       toast.success("new item added ! ");

@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 const PageHeader = ({ titleText }) => {
   return (
-    <div className="row">
-      <div className="col-12 mt-4">
+    <div className="row  ">
+      <div className=" mt-4 mb-2 mx-auto ">
         <h1>{titleText}</h1>
       </div>
     </div>

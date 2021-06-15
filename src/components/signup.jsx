@@ -32,11 +32,7 @@ class Signup extends Form {
     try {
       await http.post(`${apiUrl}/users/singup`, data);
       toast.success(`you just singup as ${data.name}`);
-      if (!data.seller) {
-        this.props.history.replace("/singin");
-      } else {
-        this.props.history.replace("/setUpShop");
-      }
+      this.props.history.replace("/signin");
     } catch (err) {
       if (err.response && err.response.status === 400) {
         this.setState({ errors: err.response.data.errors });
