@@ -1,5 +1,7 @@
 # full front & back -end project - e-store
 
+# fron side
+
 ## full functioning e-store
 
 This project is to make a platform to sell products online.
